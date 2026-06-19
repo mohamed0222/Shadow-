@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alaa Shadowing Pro — GOLD Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        :root {
+            --bg-primary: #070d1a;
+            --bg-secondary: #0e1829;
+            --bg-card: #141f35;
+            --bg-hover: #1a2842;
+            --bg-input: #0a1220;
+            --text-primary: #eef2ff;
+            --text-secondary: #7c8db5;
+            --border: #1e2f4a;
+            --shadow: 0 8px 24px rgba(0,0,0,0.5);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+            --radius: 12px;
+            --font-size-primary: 22px;
+            --font-size-secondary: 17px;
+            --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+            --blue: #3b82f6;
+            --blue-l: #60a5fa;
+            --blue-g: rgba(59,130,246,0.3);
+            --green: #10b981;
+            --green-l: #34d399;
+            --green-g: rgba(16,185,129,0.3);
+            --violet: #8b5cf6;
+            --violet-l: #a78bfa;
+            --violet-g: rgba(139,92,246,0.3);
+            --amber: #f59e0b;
+            --amber-l: #fbbf24;
+            --amber-g: rgba(245,158,11,0.3);
+            --rose: #f43f5e;
+            --rose-l: #fb7185;
+            --rose-g: rgba(244,63,94,0.3);
+            --cyan: #06b6d4;
+            --cyan-l: #22d3ee;
+            --cyan-g: rgba(6,182,212,0.3);
+            --orange: #f97316;
+            --orange-l: #fb923c;
+            --orange-g: rgba(249,115,22,0.3);
+            --pink: #ec4899;
+            --pink-l: #f472b6;
+            --pink-g: rgba(236,72,153,0.3);
+            --accent: var(--blue);
+            --accent-l: var(--blue-l);
+            --accent-g: var(--blue-g);
+        }
+        [data-theme="light"] {
+            --bg-primary: #f0f4ff;
+            --bg-secondary: #ffffff;
+            --bg-card: #e8eeff;
+            --bg-hover: #dce5ff;
+            --bg-input: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #5a6b8c;
+            --border: #c5d0ef;
+            --shadow: 0 8px 24px rgba(59,130,246,0.1);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        html,body { height:100%; overflow:hidden; }
+        body { font-family:'Cairo',sans-serif; background:var(--bg-primary); color:var(--text-primary); display:flex; flex-direction:column; transition:background 0.3s,color 0.3s; }
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+
+        .header { background:var(--bg-secondary); border-bottom:1px solid var(--border); padding:0 0.8rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; height:54px; position:relative; z-index:100; }
+        .logo { display:flex; align-items:center; gap:0.5rem; }
+        .logo-icon { width:34px; height:34px; background:linear-gradient(135deg,var(--blue),var(--violet)); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; box-shadow:0 0 16px var(--blue-g); animation:logo-glow 2s ease-in-out infinite; }
+        @keyframes logo-glow { 0%,100%{box-shadow:0 0 16px var(--blue-g);}50%{box-shadow:0 0 24px var(--violet-g);} }
+        .logo-text { font-size:1rem; font-weight:900; background:linear-gradient(90deg,var(--blue-l),var(--violet-l)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .logo-ver { font-size:0.52rem; background:linear-gradient(135deg,#f59e0b,#f97316); color:#000; padding:1px 5px; border-radius:4px; font-weight:800; -webkit-text-fill-color:#000; margin-top:2px; }
+        .header-actions { display:flex; align-items:center; gap:0.38rem; }
+        .btn-icon { width:32px; height:32px; border-radius:8px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.88rem; transition:var(--transition); }
+        .btn-icon:hover { background:var(--bg-hover); color:var(--text-primary); transform:translateY(-1px); }
+        .color-picker { display:flex; gap:3px; padding:3px; background:var(--bg-card); border-radius:10px; border:1px solid var(--border); }
+        .color-dot { width:16px; height:16px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:transform 0.2s; }
+        .color-dot:hover { transform:scale(1.2); }
+        .color-dot.active { border-color:#fff; }
+
+        .app-body { display:flex; flex:1; min-height:0; overflow:hidden; }
+        .left-panel { display:flex; flex-direction:column; flex:1; min-width:0; padding:0.55rem 0.3rem 0.55rem 0.6rem; gap:0.45rem; overflow:hidden; }
+        .right-panel { width:365px; flex-shrink:0; padding:0.55rem 0.6rem 0.55rem 0.3rem; overflow-y:auto; display:flex; flex-direction:column; gap:0.38rem; }
+
+        .video-wrapper { position:relative; width:100%; background:#000; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow),0 0 0 1px var(--border); flex-shrink:0; aspect-ratio:16/9; }
+        #yt-player-container { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+        .video-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; background:radial-gradient(ellipse at center,rgba(59,130,246,0.05),transparent 70%); }
+        .video-placeholder .icon { font-size:3rem; opacity:0.3; }
+        .video-placeholder .hint { font-size:0.7rem; color:var(--text-secondary); }
+        #local-player { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#000; }
+        .progress-overlay { position:absolute; bottom:0; left:0; right:0; height:3px; background:rgba(255,255,255,0.07); pointer-events:none; }
+        .progress-fill { height:100%; background:linear-gradient(90deg,var(--blue),var(--violet)); width:0%; transition:width 0.5s linear; }
+
+        .sentence-display { background:var(--bg-secondary); border-radius:var(--radius); padding:0.8rem 1rem; text-align:center; flex-shrink:0; display:flex; flex-direction:column; justify-content:center; min-height:100px; gap:0.35rem; border:1px solid var(--border); position:relative; overflow:hidden; }
+        .sentence-display::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.05),transparent 65%); pointer-events:none; }
+        .sentence-label { font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.12em; display:flex; align-items:center; justify-content:center; gap:0.4rem; }
+        .live-dot { width:7px; height:7px; border-radius:50%; background:var(--rose); box-shadow:0 0 8px var(--rose-g); animation:pulse-dot 1.2s ease-in-out infinite; display:none; }
+        .live-dot.active { display:inline-block; }
+        @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);} }
+        .sentence-text { font-size:var(--font-size-primary); font-weight:800; line-height:1.7; color:var(--text-primary); word-wrap:break-word; min-height:2.4rem; transition:opacity 0.3s,filter 0.3s; }
+        .sentence-text.blurred { opacity:0.05; filter:blur(6px); }
+        .sentence-text span.w { display:inline; border-radius:4px; padding:0 2px; cursor:pointer; transition:all 0.1s; }
+        .sentence-text span.w:hover { background:rgba(59,130,246,0.18); }
+        .sentence-text span.w.w-active { color:var(--cyan-l)!important; text-shadow:0 0 18px var(--cyan-g); font-weight:900; background:rgba(6,182,212,0.12); }
+        .sentence-text span.w.w-past { color:var(--text-secondary)!important; opacity:0.5; }
+        .sentence-secondary { font-size:var(--font-size-secondary); font-weight:600; line-height:1.5; color:var(--text-secondary); word-wrap:break-word; padding-top:0.35rem; border-top:1px dashed var(--border); transition:opacity 0.3s; }
+        .sentence-secondary.blurred { opacity:0.04; filter:blur(4px); }
+        .sentence-secondary span { display:inline; border-radius:3px; padding:0 2px; cursor:pointer; }
+        .sentence-secondary span:hover { background:rgba(255,255,255,0.05); }
+        .sentence-time { font-size:0.66rem; color:var(--text-secondary); font-family:'JetBrains Mono',monospace; }
+        .hide-badge { position:absolute; top:7px; left:8px; background:var(--amber); color:#000; font-size:0.56rem; font-weight:800; padding:2px 6px; border-radius:5px; opacity:0; transition:opacity 0.3s; pointer-events:none; }
+        .hide-badge.show { opacity:1; }
+
+        .playback-bar { display:flex; align-items:center; justify-content:center; gap:0.32rem; flex-wrap:wrap; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:0.48rem 0.55rem; flex-shrink:0; }
+        .btn { border:none; outline:none; cursor:pointer; font-family:'Cairo',sans-serif; font-weight:700; transition:var(--transition); display:inline-flex; align-items:center; justify-content:center; gap:0.22rem; white-space:nowrap; user-select:none; }
+        .btn:active { transform:scale(0.96)!important; }
+        .btn-prev,.btn-next { background:linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff; padding:0.46rem 0.88rem; border-radius:9px; font-size:0.77rem; box-shadow:0 3px 12px rgba(37,99,235,0.4); }
+        .btn-prev:hover,.btn-next:hover { filter:brightness(1.12); transform:translateY(-2px); }
+        .btn-play { background:linear-gradient(135deg,#059669,#10b981); color:#fff; padding:0.5rem 1.5rem; font-size:0.92rem; border-radius:10px; box-shadow:0 4px 18px var(--green-g); }
+        .btn-play:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 28px var(--green-g); }
+        .btn-play.paused { background:linear-gradient(135deg,#dc2626,#ef4444); box-shadow:0 4px 18px var(--rose-g); }
+        .btn-repeat { background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; padding:0.46rem 0.76rem; border-radius:9px; font-size:0.78rem; box-shadow:0 3px 12px var(--amber-g); }
+        .btn-repeat:hover { filter:brightness(1.12); transform:translateY(-2px); }
+        .btn-loop { background:linear-gradient(135deg,#6d28d9,#8b5cf6); color:#fff; padding:0.46rem 0.76rem; border-radius:9px; font-size:0.78rem; box-shadow:0 3px 12px var(--violet-g); }
+        .btn-loop:hover { filter:brightness(1.12); transform:translateY(-2px); }
+        .btn-loop.on { background:linear-gradient(135deg,#7c3aed,#a855f7); box-shadow:0 0 0 2px var(--violet-l),0 6px 20px var(--violet-g); }
+        .btn-ab { background:linear-gradient(135deg,#0e7490,#06b6d4); color:#fff; padding:0.46rem 0.76rem; border-radius:9px; font-size:0.78rem; box-shadow:0 3px 12px var(--cyan-g); }
+        .btn-ab:hover { filter:brightness(1.12); transform:translateY(-2px); }
+        .btn-ab.st-a { background:linear-gradient(135deg,#b45309,#f59e0b)!important; }
+        .btn-ab.st-on { background:linear-gradient(135deg,#be123c,#f43f5e)!important; box-shadow:0 0 0 2px var(--rose-l),0 6px 20px var(--rose-g)!important; animation:ab-pulse 1s ease infinite; }
+        @keyframes ab-pulse { 0%,100%{opacity:1;}50%{opacity:0.78;} }
+        .btn-swap { background:linear-gradient(135deg,#c2410c,#f97316); color:#fff; padding:0.46rem 0.76rem; border-radius:9px; font-size:0.88rem; box-shadow:0 3px 12px var(--orange-g); }
+        .btn-swap:hover { filter:brightness(1.12); transform:translateY(-2px) rotate(12deg); }
+        .btn-copy { background:linear-gradient(135deg,#9d174d,#ec4899); color:#fff; padding:0.46rem 0.76rem; border-radius:9px; font-size:0.78rem; box-shadow:0 3px 12px var(--pink-g); }
+        .btn-copy:hover { filter:brightness(1.12); transform:translateY(-2px); }
+
+        .speed-bar { display:flex; align-items:center; gap:0.3rem; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius); padding:0.36rem 0.75rem; flex-shrink:0; }
+        .speed-label { font-size:0.62rem; color:var(--text-secondary); }
+        .speed-btns { display:flex; gap:0.22rem; }
+        .speed-btn { background:var(--bg-card); border:1px solid var(--border); color:var(--text-secondary); padding:0.22rem 0.42rem; border-radius:6px; font-size:0.68rem; font-weight:700; cursor:pointer; font-family:'JetBrains Mono',monospace; transition:var(--transition); }
+        .speed-btn:hover { background:var(--bg-hover); color:var(--text-primary); }
+        .speed-btn.active { background:linear-gradient(135deg,var(--blue),var(--violet)); color:#fff; border-color:transparent; box-shadow:0 2px 8px var(--blue-g); }
+        .speed-range { flex:1; }
+        .range-s { -webkit-appearance:none; appearance:none; height:4px; border-radius:2px; background:var(--border); outline:none; cursor:pointer; width:100%; }
+        .range-s::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; background:linear-gradient(135deg,var(--blue),var(--violet)); border-radius:50%; cursor:pointer; box-shadow:0 0 8px var(--blue-g); }
+        .speed-val { font-family:'JetBrains Mono',monospace; font-size:0.75rem; font-weight:700; color:var(--blue-l); min-width:36px; text-align:center; }
+
+        .toggles-row { display:flex; align-items:center; justify-content:center; gap:0.35rem; flex-wrap:wrap; font-size:0.66rem; flex-shrink:0; }
+        .toggle-pill { display:flex; align-items:center; gap:0.26rem; cursor:pointer; user-select:none; padding:0.26rem 0.58rem; border-radius:20px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-secondary); transition:var(--transition); }
+        .toggle-pill:has(input:checked) { border-color:var(--blue); background:rgba(59,130,246,0.1); color:var(--blue-l); }
+        .toggle-pill input { accent-color:var(--blue); cursor:pointer; }
+
+        .merged-panel { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius); flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+        .merged-tabs { display:flex; background:var(--bg-card); padding:4px; gap:2px; border-bottom:1px solid var(--border); flex-shrink:0; }
+        .merged-tab { flex:1; padding:0.46rem; border:none; background:transparent; color:var(--text-secondary); font-family:'Cairo',sans-serif; font-size:0.72rem; font-weight:700; cursor:pointer; border-radius:8px; transition:var(--transition); display:flex; align-items:center; justify-content:center; gap:0.25rem; }
+        .merged-tab:hover { color:var(--text-primary); background:rgba(255,255,255,0.03); }
+        .merged-tab.active { background:linear-gradient(135deg,var(--blue),var(--violet)); color:#fff; box-shadow:0 3px 10px var(--blue-g); }
+        .merged-tab .badge { font-size:0.57rem; background:rgba(255,255,255,0.2); padding:1px 5px; border-radius:8px; min-width:17px; text-align:center; }
+        .merged-content { flex:1; overflow-y:auto; padding:0.5rem; }
+        .tab-pane { display:none; }
+        .tab-pane.active { display:block; }
+
+        .segment-list { border:1px solid var(--border); border-radius:10px; background:var(--bg-card); overflow:hidden; max-height:250px; overflow-y:auto; }
+        .segment-item { padding:0.48rem 0.62rem; border-bottom:1px solid var(--border); cursor:pointer; display:grid; grid-template-columns:auto 1fr; align-items:start; gap:0.48rem; transition:all 0.15s; border-right:3px solid transparent; }
+        .segment-item:last-child { border-bottom:none; }
+        .segment-item:hover { background:var(--bg-hover); }
+        .segment-item.active { background:linear-gradient(90deg,rgba(59,130,246,0.18),rgba(59,130,246,0.03)); border-right-color:var(--blue); }
+        .segment-item:not(.active) { opacity:0.7; }
+        .seg-time { color:var(--cyan-l); font-family:'JetBrains Mono',monospace; font-size:0.67rem; font-weight:600; white-space:nowrap; background:rgba(6,182,212,0.1); padding:0.16rem 0.36rem; border-radius:5px; }
+        .seg-body { display:flex; flex-direction:column; gap:0.1rem; min-width:0; }
+        .seg-text { font-size:0.77rem; line-height:1.4; word-break:break-word; }
+        .seg-sub { font-size:0.65rem; color:var(--text-secondary); line-height:1.3; }
+
+        .panel-card { background:var(--bg-secondary); border:1px solid var(--border); border-radius:10px; overflow:hidden; flex-shrink:0; }
+        .panel-head { display:flex; align-items:center; justify-content:space-between; padding:0.52rem 0.72rem; cursor:pointer; user-select:none; transition:background 0.15s; }
+        .panel-head:hover { background:var(--bg-hover); }
+        .panel-head-left { display:flex; align-items:center; gap:0.38rem; font-size:0.68rem; font-weight:800; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.06em; }
+        .panel-head-right { display:flex; align-items:center; gap:0.38rem; }
+        .panel-arrow { font-size:0.6rem; color:var(--text-secondary); transition:transform 0.25s; }
+        .panel-card.collapsed .panel-arrow { transform:rotate(-90deg); }
+        .panel-body { padding:0.62rem 0.72rem 0.72rem; border-top:1px solid var(--border); }
+        .panel-card.collapsed .panel-body { display:none; }
+        .panel-badge { font-size:0.57rem; background:var(--bg-card); border:1px solid var(--border); color:var(--text-secondary); padding:0.1rem 0.4rem; border-radius:10px; font-family:'JetBrains Mono',monospace; }
+
+        .input-group { display:flex; gap:0.28rem; margin-bottom:0.38rem; }
+        .input-field { flex:1; background:var(--bg-input); border:1.5px solid var(--border); color:var(--text-primary); padding:0.46rem 0.68rem; border-radius:8px; font-family:'Cairo',sans-serif; font-size:0.81rem; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
+        .input-field:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,130,246,0.14); }
+        .input-field::placeholder { color:var(--text-secondary); opacity:0.6; }
+        .select-field { background:var(--bg-input); border:1.5px solid var(--border); color:var(--text-primary); padding:0.44rem 0.62rem; border-radius:8px; font-family:'Cairo',sans-serif; font-size:0.77rem; outline:none; cursor:pointer; width:100%; transition:border-color 0.2s; }
+        .select-field:focus { border-color:var(--blue); }
+
+        .pbtn { border:none; padding:0.48rem 0.7rem; border-radius:8px; font-size:0.77rem; font-weight:700; cursor:pointer; font-family:'Cairo',sans-serif; transition:var(--transition); display:flex; align-items:center; justify-content:center; gap:0.28rem; }
+        .pbtn:hover { filter:brightness(1.1); transform:translateY(-1px); }
+        .pbtn-blue { background:linear-gradient(135deg,#1d4ed8,#3b82f6); color:#fff; box-shadow:0 3px 12px var(--blue-g); }
+        .pbtn-cyan { background:linear-gradient(135deg,#0e7490,var(--cyan)); color:#fff; box-shadow:0 3px 10px var(--cyan-g); }
+        .pbtn-green { background:linear-gradient(135deg,#059669,#10b981); color:#fff; box-shadow:0 3px 12px var(--green-g); }
+        .pbtn-violet { background:linear-gradient(135deg,#6d28d9,#8b5cf6); color:#fff; box-shadow:0 3px 12px var(--violet-g); }
+        .pbtn-amber { background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; box-shadow:0 3px 10px var(--amber-g); }
+        .pbtn-rose { background:linear-gradient(135deg,#be123c,#f43f5e); color:#fff; box-shadow:0 3px 10px var(--rose-g); }
+        .pbtn-gray { background:linear-gradient(135deg,#374151,#6b7280); color:#fff; }
+        .pbtn-orange { background:linear-gradient(135deg,#c2410c,#f97316); color:#fff; box-shadow:0 3px 10px var(--orange-g); }
+
+        .mode-toggle { display:flex; background:var(--bg-card); border-radius:8px; padding:3px; gap:2px; margin-bottom:0.45rem; }
+        .mode-btn { flex:1; padding:0.36rem; border:none; background:transparent; color:var(--text-secondary); font-family:'Cairo',sans-serif; font-size:0.67rem; font-weight:700; cursor:pointer; border-radius:6px; transition:var(--transition); }
+        .mode-btn.active { background:linear-gradient(135deg,var(--blue),var(--violet)); color:#fff; box-shadow:0 2px 8px var(--blue-g); }
+
+        .btn-lang { background:var(--bg-card); color:var(--text-secondary); border:2px solid transparent; padding:0.26rem 0.58rem; border-radius:7px; font-size:0.68rem; cursor:pointer; font-family:'JetBrains Mono',sans-serif; font-weight:700; transition:var(--transition); position:relative; }
+        .btn-lang:hover { background:var(--bg-hover); color:var(--text-primary); }
+        .btn-lang.active { color:#fff; border-color:transparent; box-shadow:0 2px 10px var(--blue-g); }
+        [data-lang="auto"].active { background:linear-gradient(135deg,var(--blue),var(--cyan)); }
+        [data-lang="ar"].active { background:linear-gradient(135deg,#059669,#10b981); }
+        [data-lang="en"].active { background:linear-gradient(135deg,#dc2626,#ef4444); }
+        [data-lang="de"].active { background:linear-gradient(135deg,#92400e,#b45309); }
+        [data-slang="none"].active { background:linear-gradient(135deg,#475569,#64748b); }
+        [data-slang="ar"].active { background:linear-gradient(135deg,#059669,#10b981); }
+        [data-slang="en"].active { background:linear-gradient(135deg,#dc2626,#ef4444); }
+        [data-slang="de"].active { background:linear-gradient(135deg,#92400e,#b45309); }
+
+        .offset-row { display:flex; align-items:center; justify-content:center; gap:0.25rem; flex-wrap:wrap; }
+        .btn-offset { padding:0.3rem 0.48rem; border-radius:7px; border:none; font-size:0.67rem; font-weight:700; cursor:pointer; font-family:'JetBrains Mono',monospace; transition:var(--transition); }
+        .btn-offset:hover { filter:brightness(1.15); transform:translateY(-1px); }
+        .btn-offset-m { background:linear-gradient(135deg,#be123c,#f43f5e); color:#fff; }
+        .btn-offset-p { background:linear-gradient(135deg,#059669,#10b981); color:#fff; }
+        .btn-offset-big { background:linear-gradient(135deg,#374151,#4b5563); color:#fff; }
+
+        .loop-stepper { display:flex; align-items:center; background:var(--bg-card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+        .loop-stepper button { background:transparent; border:none; color:var(--text-primary); font-size:1.1rem; font-weight:900; width:36px; height:36px; cursor:pointer; transition:background 0.15s; }
+        .loop-stepper button:hover { background:var(--bg-hover); }
+        .loop-stepper span { font-size:1rem; font-weight:800; font-family:'JetBrains Mono',monospace; color:var(--violet-l); min-width:42px; text-align:center; border-right:1px solid var(--border); border-left:1px solid var(--border); }
+
+        .font-size-control { display:flex; align-items:center; gap:0.48rem; background:var(--bg-card); padding:0.38rem 0.62rem; border-radius:8px; border:1px solid var(--border); }
+        .font-size-control label { font-size:0.65rem; color:var(--text-secondary); white-space:nowrap; }
+        .font-size-value { font-family:'JetBrains Mono',monospace; font-size:0.68rem; font-weight:700; color:var(--violet-l); min-width:34px; text-align:center; }
+
+        .drop-zone { border:2px dashed var(--border); border-radius:9px; padding:0.75rem; text-align:center; color:var(--text-secondary); font-size:0.74rem; transition:var(--transition); cursor:pointer; margin-top:0.32rem; }
+        .drop-zone:hover,.drop-zone.drag-over { border-color:var(--violet); background:rgba(139,92,246,0.07); color:var(--violet-l); }
+
+        .toast-container { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:2000; display:flex; flex-direction:column; gap:0.38rem; pointer-events:none; width:88%; max-width:370px; }
+        .toast { background:var(--bg-card); color:var(--text-primary); padding:0.7rem 1rem; border-radius:10px; border:1px solid var(--border); box-shadow:var(--shadow); font-size:0.8rem; opacity:0; transform:translateY(14px) scale(0.97); transition:all 0.27s cubic-bezier(0.34,1.56,0.64,1); pointer-events:auto; text-align:center; }
+        .toast.show { opacity:1; transform:translateY(0) scale(1); }
+        .toast.success { border-color:var(--green); background:rgba(16,185,129,0.1); }
+        .toast.error { border-color:var(--rose); background:rgba(244,63,94,0.1); }
+        .toast.warning { border-color:var(--amber); background:rgba(245,158,11,0.1); }
+
+        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.78); backdrop-filter:blur(6px); z-index:1500; display:flex; align-items:center; justify-content:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+        .modal-overlay.show { opacity:1; pointer-events:auto; }
+        .modal-box { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius); width:100%; max-width:440px; max-height:84vh; overflow-y:auto; box-shadow:var(--shadow-lg); transform:scale(0.93) translateY(10px); transition:transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+        .modal-overlay.show .modal-box { transform:scale(1) translateY(0); }
+        .modal-header { padding:0.88rem 1rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05)); }
+        .modal-title { font-size:1rem; font-weight:800; }
+        .modal-close { background:none; border:none; color:var(--text-secondary); font-size:1.3rem; cursor:pointer; width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:7px; transition:var(--transition); }
+        .modal-close:hover { background:rgba(244,63,94,0.15); color:var(--rose); }
+        .modal-body { padding:1rem; }
+
+        .dict-word { font-size:2rem; font-weight:900; color:var(--blue-l); font-family:'JetBrains Mono',sans-serif; direction:ltr; line-height:1.1; }
+        .dict-phonetic { font-size:0.76rem; color:var(--text-secondary); font-family:'JetBrains Mono',monospace; direction:ltr; }
+        .dict-trans-box { background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(139,92,246,0.06)); border:1px solid rgba(59,130,246,0.2); border-radius:9px; padding:0.72rem 0.95rem; margin:0.65rem 0; }
+        .dict-trans-label { font-size:0.59rem; font-weight:800; color:var(--blue-l); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.22rem; }
+        .dict-trans-text { font-size:1.08rem; font-weight:700; }
+        .dict-loading { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.75rem; padding:2.2rem; color:var(--text-secondary); }
+        .dict-loading-word { font-size:1.2rem; font-weight:900; color:var(--blue-l); font-family:'JetBrains Mono',sans-serif; }
+        .dict-error { text-align:center; padding:1.4rem; }
+
+        .spinner { width:22px; height:22px; border:2.5px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin 0.7s linear infinite; display:inline-block; }
+        @keyframes spin { to{transform:rotate(360deg);} }
+
+        .kbd { display:inline-block; background:var(--bg-card); border:1px solid var(--border); border-radius:5px; padding:0.1rem 0.4rem; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--cyan-l); margin:0 2px; }
+        .help-row { display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px solid var(--border); font-size:0.83rem; align-items:center; }
+        .help-row:last-child { border-bottom:none; }
+        .hidden { display:none !important; }
+
+        .copy-tooltip { position:fixed; background:var(--green); color:#fff; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; pointer-events:none; z-index:3000; opacity:0; transform:translateY(10px); transition:all 0.2s; }
+        .copy-tooltip.show { opacity:1; transform:translateY(0); }
+
+        @media(max-width:900px) {
+            .app-body { flex-direction:column; overflow:auto; }
+            html,body { overflow:auto; }
+            .left-panel { padding:0.5rem; overflow:visible; }
+            .right-panel { width:100%; padding:0.5rem; overflow:visible; }
+            .speed-btns { display:none; }
+        }
+        @media(max-width:480px) {
+            .btn-prev,.btn-next,.btn-repeat,.btn-loop,.btn-ab,.btn-swap,.btn-copy { padding:0.42rem 0.55rem; font-size:0.72rem; }
+            .btn-play { padding:0.46rem 1rem; font-size:0.84rem; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">🎯</div>
+        <div><div class="logo-text">Alaa Shadowing Pro</div></div>
+        <span class="logo-ver">GOLD Pro</span>
+    </div>
+    <div class="header-actions">
+        <button class="btn-icon" id="help-btn" title="اختصارات ⌨️">⌨️</button>
+        <div class="color-picker">
+            <div class="color-dot active" style="background:#3b82f6" data-color="#3b82f6" data-glow="rgba(59,130,246,0.3)"></div>
+            <div class="color-dot" style="background:#10b981" data-color="#10b981" data-glow="rgba(16,185,129,0.3)"></div>
+            <div class="color-dot" style="background:#8b5cf6" data-color="#8b5cf6" data-glow="rgba(139,92,246,0.3)"></div>
+            <div class="color-dot" style="background:#f97316" data-color="#f97316" data-glow="rgba(249,115,22,0.3)"></div>
+            <div class="color-dot" style="background:#ec4899" data-color="#ec4899" data-glow="rgba(236,72,153,0.3)"></div>
+            <div class="color-dot" style="background:#06b6d4" data-color="#06b6d4" data-glow="rgba(6,182,212,0.3)"></div>
+        </div>
+        <button class="btn-icon" id="theme-toggle" title="تبديل الوضع">🌙</button>
+    </div>
+</header>
+
+<div class="app-body">
+    <div class="left-panel">
+        <div class="video-wrapper" id="video-wrapper">
+            <div id="yt-player-container">
+                <div class="video-placeholder" id="video-placeholder">
+                    <div class="icon">🎬</div>
+                    <div>أدخل رابط يوتيوب أو اختر ملف فيديو</div>
+                    <div class="hint">MP4 · WebM · MKV · MOV</div>
+                </div>
+            </div>
+            <video id="local-player" class="hidden" playsinline></video>
+            <input type="file" id="video-file-input" accept="video/*" style="display:none;">
+            <div class="progress-overlay"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+
+        <div class="sentence-display">
+            <div class="hide-badge" id="hide-badge">مخفي</div>
+            <div class="sentence-label">
+                <div class="live-dot" id="live-dot"></div>
+                <span id="primary-label">اللغة المستهدفة</span>
+                <span style="opacity:0.3">|</span>
+                <span id="secondary-label">الترجمة</span>
+            </div>
+            <div class="sentence-text" id="sentence-text" dir="auto">أدخل رابط الفيديو وملف الترجمة للبدء</div>
+            <div class="sentence-secondary hidden" id="sentence-secondary" dir="auto"></div>
+            <div class="sentence-time" id="sentence-time">--:-- → --:--</div>
+        </div>
+
+        <div class="playback-bar">
+            <button class="btn btn-prev" id="btn-prev">⏮ سابق</button>
+            <button class="btn btn-play" id="btn-play">▶ تشغيل</button>
+            <button class="btn btn-next" id="btn-next">التالي ⏭</button>
+            <button class="btn btn-repeat" id="btn-repeat">↺ إعادة</button>
+            <button class="btn btn-loop" id="btn-loop">🔁 <span id="loop-display">×1</span></button>
+            <button class="btn btn-ab" id="btn-ab">A-B</button>
+            <button class="btn btn-swap" id="btn-swap">⇄</button>
+            <button class="btn btn-copy" id="btn-copy" title="نسخ الجملة الحالية">📋 نسخ</button>
+        </div>
+
+        <div class="speed-bar">
+            <span class="speed-label">🐢</span>
+            <div class="speed-btns">
+                <button class="speed-btn" data-speed="0.5">×0.5</button>
+                <button class="speed-btn" data-speed="0.75">×0.75</button>
+                <button class="speed-btn active" data-speed="1">×1</button>
+                <button class="speed-btn" data-speed="1.25">×1.25</button>
+                <button class="speed-btn" data-speed="1.5">×1.5</button>
+            </div>
+            <div class="speed-range">
+                <input type="range" class="range-s" id="playback-speed" min="0.25" max="2" step="0.05" value="1">
+            </div>
+            <span class="speed-val" id="speed-val">1.0×</span>
+            <span class="speed-label">🐇</span>
+        </div>
+
+        <div class="toggles-row">
+            <label class="toggle-pill"><input type="checkbox" id="hide-primary-toggle"> 👁 إخفاء المستهدفة</label>
+            <label class="toggle-pill"><input type="checkbox" id="hide-secondary-toggle"> 🙈 إخفاء الترجمة</label>
+            <label class="toggle-pill"><input type="checkbox" id="auto-scroll-toggle" checked> 📜 تمرير تلقائي</label>
+            <label class="toggle-pill"><input type="checkbox" id="word-highlight-toggle" checked> ✨ تمييز الكلمات</label>
+        </div>
+
+        <div class="merged-panel">
+            <div class="merged-tabs">
+                <button class="merged-tab active" data-tab="segments">📝 الجمل <span class="badge" id="badge-segments">0</span></button>
+                <button class="merged-tab" data-tab="levels">📊 المستويات</button>
+            </div>
+            <div class="merged-content">
+                <div class="tab-pane active" id="tab-segments">
+                    <input type="text" class="input-field search-input" id="sentence-search" placeholder="🔍 ابحث في الجمل...">
+                    <div class="segment-list" id="segment-list">
+                        <div style="padding:1rem;text-align:center;font-size:0.78rem;color:var(--text-secondary);">لا توجد فترات بعد</div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-levels">
+                    <div style="padding:0.8rem;text-align:center;font-size:0.78rem;color:var(--text-secondary);">ميزة التصنيف معطلة</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="panel-card" id="panel-video">
+            <div class="panel-head" onclick="togglePanel('panel-video')">
+                <div class="panel-head-left">🎬 مصدر الفيديو</div>
+                <div class="panel-head-right"><span class="panel-arrow">▾</span></div>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <input type="text" class="input-field" id="yt-url" placeholder="رابط يوتيوب..." dir="ltr">
+                    <button class="pbtn pbtn-blue" id="btn-load-yt">▶</button>
+                </div>
+                <div style="display:flex;gap:0.3rem;">
+                    <button class="pbtn pbtn-violet" id="btn-load-local" style="flex:1;font-size:0.72rem;">📁 ملف محلي</button>
+                    <button class="pbtn pbtn-gray" id="btn-clear-video" style="flex:1;font-size:0.72rem;">🗑️ مسح</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-card" id="panel-subs">
+            <div class="panel-head" onclick="togglePanel('panel-subs')">
+                <div class="panel-head-left">📄 ملفات الترجمة</div>
+                <div class="panel-head-right">
+                    <span class="panel-badge" id="badge-primary-file">—</span>
+                    <span class="panel-arrow">▾</span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div style="font-size:0.68rem;color:var(--text-secondary);margin-bottom:0.32rem;">🎯 الترجمة الأساسية (المستهدفة)</div>
+                <div style="display:flex;gap:0.3rem;margin-bottom:0.5rem;">
+                    <div class="drop-zone" id="drop-primary" style="flex:1;margin:0;">
+                        <div>📂 اسحب SRT/VTT هنا أو انقر</div>
+                        <input type="file" id="sub-primary-input" accept=".srt,.vtt,.ass,.ssa" style="display:none;">
+                    </div>
+                </div>
+                <div style="font-size:0.68rem;color:var(--text-secondary);margin-bottom:0.32rem;">🌐 الترجمة الثانوية (للمساعدة)</div>
+                <div class="drop-zone" id="drop-secondary" style="margin:0 0 0.5rem;">
+                    <div>📂 اسحب SRT/VTT هنا أو انقر</div>
+                    <input type="file" id="sub-secondary-input" accept=".srt,.vtt,.ass,.ssa" style="display:none;">
+                </div>
+                <div style="display:flex;gap:0.3rem;">
+                    <button class="pbtn pbtn-rose" id="btn-clear-subs" style="flex:1;font-size:0.72rem;">🗑️ مسح الترجمة</button>
+                    <button class="pbtn pbtn-amber" id="btn-swap-subs" style="flex:1;font-size:0.72rem;">⇄ تبديل</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-card collapsed" id="panel-lang">
+            <div class="panel-head" onclick="togglePanel('panel-lang')">
+                <div class="panel-head-left">🌍 إعدادات اللغة</div>
+                <div class="panel-head-right"><span class="panel-arrow">▾</span></div>
+            </div>
+            <div class="panel-body">
+                <div style="font-size:0.65rem;color:var(--text-secondary);margin-bottom:0.3rem;">لغة الترجمة الأساسية:</div>
+                <div style="display:flex;gap:0.26rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+                    <button class="btn-lang active" data-lang="auto">🔍 تلقائي</button>
+                    <button class="btn-lang" data-lang="en">🇬🇧 EN</button>
+                    <button class="btn-lang" data-lang="ar">🇸🇦 AR</button>
+                    <button class="btn-lang" data-lang="de">🇩🇪 DE</button>
+                </div>
+                <div style="font-size:0.65rem;color:var(--text-secondary);margin-bottom:0.3rem;">لغة الترجمة الثانوية:</div>
+                <div style="display:flex;gap:0.26rem;flex-wrap:wrap;">
+                    <button class="btn-lang active" data-slang="none">— بدون</button>
+                    <button class="btn-lang" data-slang="ar">🇸🇦 AR</button>
+                    <button class="btn-lang" data-slang="en">🇬🇧 EN</button>
+                    <button class="btn-lang" data-slang="de">🇩🇪 DE</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-card collapsed" id="panel-pause">
+            <div class="panel-head" onclick="togglePanel('panel-pause')">
+                <div class="panel-head-left">⏸ إيقاف ذكي</div>
+                <div class="panel-head-right"><span class="panel-arrow">▾</span></div>
+            </div>
+            <div class="panel-body">
+                <div class="mode-toggle">
+                    <button class="mode-btn active" data-mode="sentence">جملة</button>
+                    <button class="mode-btn" data-mode="time">وقت</button>
+                    <button class="mode-btn" data-mode="words">كلمات</button>
+                </div>
+                <div id="pause-mode-opts">
+                    <label class="toggle-pill" style="width:100%;justify-content:center;margin-bottom:0.3rem;">
+                        <input type="checkbox" id="smart-pause-toggle"> ⏸ تفعيل الإيقاف الذكي
+                    </label>
+                    <div id="pause-mode-desc" style="font-size:0.68rem;color:var(--text-secondary);text-align:center;">يوقف تلقائياً بعد كل جملة</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-card collapsed" id="panel-repeat">
+            <div class="panel-head" onclick="togglePanel('panel-repeat')">
+                <div class="panel-head-left">🔁 تكرار ذكي</div>
+                <div class="panel-head-right"><span class="panel-arrow">▾</span></div>
+            </div>
+            <div class="panel-body">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;">
+                    <span style="font-size:0.72rem;color:var(--text-secondary);">عدد التكرارات:</span>
+                    <div class="loop-stepper">
+                        <button id="loop-dec">−</button>
+                        <span id="loop-count-display">1</span>
+                        <button id="loop-inc">+</button>
+                    </div>
+                </div>
+                <label class="toggle-pill" style="width:100%;justify-content:center;margin-bottom:0.3rem;">
+                    <input type="checkbox" id="shadow-mode-toggle"> 🎤 وضع المحاكاة الصوتية
+                </label>
+                <div style="font-size:0.65rem;color:var(--text-secondary);text-align:center;">يُكرر الجملة تلقائياً للتدرب</div>
+            </div>
+        </div>
+
+        <div class="panel-card collapsed" id="panel-appearance">
+            <div class="panel-head" onclick="togglePanel('panel-appearance')">
+                <div class="panel-head-left">🎨 المظهر والخطوط</div>
+                <div class="panel-head-right"><span class="panel-arrow">▾</span></div>
+            </div>
+            <div class="panel-body">
+                <div class="font-size-control" style="margin-bottom:0.38rem;">
+                    <label>حجم الخط الرئيسي</label>
+                    <input type="range" class="range-s" id="font-primary-range" min="14" max="40" value="22" style="flex:1;">
+                    <span class="font-size-value" id="font-primary-val">22px</span>
+                </div>
+                <div class="font-size-control">
+                    <label>حجم الخط الثانوي</label>
+                    <input type="range" class="range-s" id="font-secondary-range" min="12" max="32" value="17" style="flex:1;">
+                    <span class="font-size-value" id="font-secondary-val">17px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-card collapsed" id="panel-timing">
+            <div class="panel-head" onclick="togglePanel('panel-timing')">
+                <div class="panel-head-left">⏱ تصحيح التوقيت</div>
+                <div class="panel-head-right">
+                    <span class="panel-badge" id="badge-offset">0ms</span>
+                    <span class="panel-arrow">▾</span>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="offset-row">
+                    <button class="btn-offset btn-offset-big" id="btn-offset-m5">−5s</button>
+                    <button class="btn-offset btn-offset-m" id="btn-offset-m1">−1s</button>
+                    <button class="btn-offset btn-offset-m" id="btn-offset-m01">−0.1s</button>
+                    <span id="offset-display">0ms</span>
+                    <button class="btn-offset btn-offset-p" id="btn-offset-p01">+0.1s</button>
+                    <button class="btn-offset btn-offset-p" id="btn-offset-p1">+1s</button>
+                    <button class="btn-offset btn-offset-big" id="btn-offset-p5">+5s</button>
+                </div>
+                <button class="pbtn pbtn-gray" id="btn-reset-offset" style="width:100%;margin-top:0.5rem;font-size:0.72rem;">↺ إعادة تعيين</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+<div class="copy-tooltip" id="copy-tooltip">✅ تم النسخ!</div>
+
+<div class="modal-overlay" id="help-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-title">⌨️ اختصارات لوحة المفاتيح</div>
+            <button class="modal-close" onclick="closeModal('help-modal')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="help-row"><span>تشغيل / إيقاف</span><span><span class="kbd">Space</span></span></div>
+            <div class="help-row"><span>الجملة السابقة</span><span><span class="kbd">P</span> أو <span class="kbd">←</span></span></div>
+            <div class="help-row"><span>الجملة التالية</span><span><span class="kbd">N</span> أو <span class="kbd">→</span></span></div>
+            <div class="help-row"><span>إعادة الجملة</span><span><span class="kbd">R</span></span></div>
+            <div class="help-row"><span>تبديل الترجمات</span><span><span class="kbd">S</span></span></div>
+            <div class="help-row"><span>نسخ الجملة</span><span><span class="kbd">C</span></span></div>
+            <div class="help-row"><span>إخفاء النص</span><span><span class="kbd">H</span></span></div>
+            <div class="help-row"><span>تكرار A-B</span><span><span class="kbd">B</span></span></div>
+            <div class="help-row"><span>تقليل السرعة</span><span><span class="kbd">[</span></span></div>
+            <div class="help-row"><span>زيادة السرعة</span><span><span class="kbd">]</span></span></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="dict-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-title">📖 القاموس</div>
+            <button class="modal-close" onclick="closeModal('dict-modal')">✕</button>
+        </div>
+        <div class="modal-body" id="dict-modal-body">
+            <div class="dict-loading"><span class="spinner"></span><span>جاري البحث...</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function $(sel) {
+    if (typeof sel !== 'string') return sel;
+    if (sel[0] === '#' || sel[0] === '.') return document.querySelector(sel);
+    return document.getElementById(sel);
+}
+function $$(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+function toast(msg, type, duration) {
+    duration = duration || 3000;
+    const container = $('toast-container');
+    const el = document.createElement('div');
+    el.className = 'toast' + (type ? ' ' + type : '');
+    el.textContent = msg;
+    container.appendChild(el);
+    requestAnimationFrame(function() { el.classList.add('show'); });
+    setTimeout(function() {
+        el.classList.remove('show');
+        setTimeout(function() { el.remove(); }, 300);
+    }, duration);
+}
+
+function openModal(id) { var m = $(id); if(m) m.classList.add('show'); }
+function closeModal(id) { var m = $(id); if(m) m.classList.remove('show'); }
+function togglePanel(id) { var c = $(id); if(c) c.classList.toggle('collapsed'); }
+
+function fmtTime(s) {
+    s = Math.max(0, s);
+    var m = Math.floor(s / 60);
+    var sec = Math.floor(s % 60);
+    return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+}
+
+function debounce(fn, ms) {
+    var t;
+    return function() {
+        var args = arguments;
+        clearTimeout(t);
+        t = setTimeout(function() { fn.apply(null, args); }, ms);
+    };
+}
+
+function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════════════════════════
+// APPLICATION STATE
+// ══════════════════════════════════════════════════════════════
+var App = {
+    subtitles: [],
+    subtitles2: [],
+    currentIndex: -1,
+    isPlaying: false,
+    loopCount: 1,
+    loopRemaining: 0,
+    loopActive: false,
+    abStart: null,
+    abEnd: null,
+    abState: 0,
+    offset: 0,
+    speed: 1,
+    smartPause: false,
+    swapped: false,
+    primaryLang: 'auto',
+    secondaryLang: 'none',
+    player: null,
+    playerType: null,
+    ticker: null,
+    startTime: null,
+    hidePrimary: false,
+    hideSecondary: false,
+    pauseMode: 'sentence',
+    wordCount: 5,
+    pauseDuration: 10,
+    timeSegments: [],
+    wordSegments: [],
+    _lastSubIdx: -1,
+    _lastProgressUpdate: 0,
+    _rafRunning: false
+};
+
+function resolvedPrimary() {
+    return App.primaryLang === 'auto' ? 'en' : App.primaryLang;
+}
+function getActiveSubs() { return App.swapped ? App.subtitles2 : App.subtitles; }
+function getSecondaryActiveSubs() { return App.swapped ? App.subtitles : App.subtitles2; }
+
+// ══════════════════════════════════════════════════════════════
+// SRT / VTT PARSER
+// ══════════════════════════════════════════════════════════════
+function parseSubtitles(text) {
+    var subs = [];
+    var isSRT = /^\d+\s*\n\d{2}:\d{2}:\d{2}/m.test(text);
+    var isVTT = /^WEBVTT/m.test(text);
+
+    if (isSRT || (!isVTT && text.indexOf('-->') !== -1)) {
+        var blocks = text.trim().split(/\n\s*\n/);
+        for (var bi = 0; bi < blocks.length; bi++) {
+            var block = blocks[bi];
+            var lines = block.trim().split('\n');
+            var timeLine = -1;
+            for (var i = 0; i < lines.length; i++) {
+                if (lines[i].indexOf('-->') !== -1) { timeLine = i; break; }
+            }
+            if (timeLine === -1) continue;
+            var se = lines[timeLine].split('-->');
+            var startStr = se[0].trim().split(' ')[0];
+            var endStr = se[1].trim().split(' ')[0];
+            var start = parseSRTTime(startStr);
+            var end = parseSRTTime(endStr);
+            if (isNaN(start) || isNaN(end)) continue;
+            var txt = lines.slice(timeLine + 1).join(' ')
+                .replace(/<[^>]+>/g, '').replace(/\{[^}]+\}/g, '').trim();
+            if (txt) subs.push({ start: start, end: end, text: txt });
+        }
+    } else if (isVTT) {
+        var blocks = text.trim().split(/\n\s*\n/);
+        for (var bi = 0; bi < blocks.length; bi++) {
+            var block = blocks[bi];
+            if (block.indexOf('WEBVTT') === 0 || block.trim() === '') continue;
+            var lines = block.trim().split('\n');
+            var timeLine = -1;
+            for (var i = 0; i < lines.length; i++) {
+                if (lines[i].indexOf('-->') !== -1) { timeLine = i; break; }
+            }
+            if (timeLine === -1) continue;
+            var parts = lines[timeLine].split('-->');
+            var start = parseVTTTime(parts[0].trim());
+            var end = parseVTTTime(parts[1].trim().split(' ')[0]);
+            if (isNaN(start) || isNaN(end)) continue;
+            var txt = lines.slice(timeLine + 1).join(' ')
+                .replace(/<[^>]+>/g, '').replace(/\{[^}]+\}/g, '').trim();
+            if (txt) subs.push({ start: start, end: end, text: txt });
+        }
+    }
+    return subs.sort(function(a, b) { return a.start - b.start; });
+}
+
+function parseSRTTime(s) {
+    var m = s.replace(',', '.').match(/(\d+):(\d+):(\d+)\.(\d+)/);
+    if (!m) return NaN;
+    return (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]) + (+m[4]) / Math.pow(10, m[4].length);
+}
+
+function parseVTTTime(s) {
+    var parts = s.replace(',', '.').split(':');
+    if (parts.length === 2) {
+        return (+parts[0]) * 60 + parseFloat(parts[1]);
+    }
+    if (parts.length === 3) {
+        return (+parts[0]) * 3600 + (+parts[1]) * 60 + parseFloat(parts[2]);
+    }
+    return NaN;
+}
+
+// ══════════════════════════════════════════════════════════════
+// VIDEO PLAYERS
+// ══════════════════════════════════════════════════════════════
+var ytPlayer = null;
+
+window.onYouTubeIframeAPIReady = function() {};
+
+function extractYTId(url) {
+    var m = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+}
+
+function loadYouTube(url) {
+    var videoId = extractYTId(url);
+    if (!videoId) { toast('⚠️ رابط يوتيوب غير صحيح', 'warning'); return; }
+
+    var lp = $('local-player');
+    lp.classList.add('hidden');
+    lp.src = '';
+
+    var placeholder = $('video-placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+
+    if (ytPlayer && ytPlayer.destroy) ytPlayer.destroy();
+
+    var container = document.getElementById('yt-iframe-host');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'yt-iframe-host';
+        container.style.cssText = 'position:absolute;inset:0;';
+        $('yt-player-container').appendChild(container);
+    }
+    container.innerHTML = '';
+
+    ytPlayer = new YT.Player(container, {
+        videoId: videoId,
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: { autoplay: 1, controls: 1, rel: 0, modestbranding: 1, origin: window.location.origin || 'https://localhost' },
+        events: {
+            onReady: function(e) {
+                App.player = e.target;
+                App.playerType = 'yt';
+                App.isPlaying = true;
+                updatePlayBtn();
+                startTicker();
+                generateTimeSegments();
+                toast('✅ تم تحميل الفيديو', 'success');
+            },
+            onStateChange: function(e) {
+                App.isPlaying = (e.data === YT.PlayerState.PLAYING);
+                updatePlayBtn();
+                if (App.isPlaying && !App.ticker) startTicker();
+                if (!App.isPlaying) stopTicker();
+            },
+            onError: function(e) {
+                var msgs = { 2:'رابط غير صالح', 5:'خطأ في HTML5', 100:'الفيديو غير موجود', 101:'المشغّل غير مسموح به', 150:'المشغّل غير مسموح به' };
+                toast('⚠️ ' + (msgs[e.data] || 'خطأ YouTube: ' + e.data), 'warning');
+            }
+        }
+    });
+}
+
+function loadLocalVideo(file) {
+    var url = URL.createObjectURL(file);
+    var lp = $('local-player');
+    lp.src = url;
+    lp.classList.remove('hidden');
+
+    var placeholder = $('video-placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+
+    if (ytPlayer && ytPlayer.destroy) { ytPlayer.destroy(); ytPlayer = null; }
+
+    App.player = lp;
+    App.playerType = 'local';
+
+    lp.onplay = function() { App.isPlaying = true; updatePlayBtn(); startTicker(); };
+    lp.onpause = function() { App.isPlaying = false; updatePlayBtn(); stopTicker(); };
+    lp.onended = function() { App.isPlaying = false; updatePlayBtn(); stopTicker(); };
+
+    lp.play().catch(function() {});
+    toast('✅ تم تحميل الفيديو المحلي', 'success');
+}
+
+function getCurrentTime() {
+    if (!App.player) return 0;
+    if (App.playerType === 'yt') {
+        try { return App.player.getCurrentTime() || 0; } catch(e) { return 0; }
+    }
+    return App.player.currentTime || 0;
+}
+
+function seekTo(t) {
+    if (!App.player) return;
+    t = Math.max(0, t);
+    if (App.playerType === 'yt') {
+        try { App.player.seekTo(t, true); } catch(e) {}
+    } else {
+        App.player.currentTime = t;
+    }
+}
+
+function setPlaybackRate(r) {
+    if (!App.player) return;
+    if (App.playerType === 'yt') {
+        try { App.player.setPlaybackRate(r); } catch(e) {}
+    } else {
+        App.player.playbackRate = r;
+    }
+}
+
+function playVideo() {
+    if (!App.player) return;
+    if (App.playerType === 'yt') { try { App.player.playVideo(); } catch(e) {} }
+    else { App.player.play().catch(function() {}); }
+}
+
+function pauseVideo() {
+    if (!App.player) return;
+    if (App.playerType === 'yt') { try { App.player.pauseVideo(); } catch(e) {} }
+    else { App.player.pause(); }
+}
+
+function togglePlay() {
+    if (App.isPlaying) pauseVideo(); else playVideo();
+}
+
+function updatePlayBtn() {
+    var btn = $('btn-play');
+    if (!btn) return;
+    if (App.isPlaying) {
+        btn.classList.add('paused');
+        btn.textContent = '⏸ إيقاف';
+    } else {
+        btn.classList.remove('paused');
+        btn.textContent = '▶ تشغيل';
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// TICKER — main subtitle sync loop
+// ══════════════════════════════════════════════════════════════
+function startTicker() {
+    if (App.ticker) return;
+    App._rafRunning = true;
+    App._lastSubIdx = -1;
+    App._lastProgressUpdate = 0;
+    function rafLoop(ts) {
+        if (!App._rafRunning) return;
+        App.ticker = requestAnimationFrame(rafLoop);
+        tick(ts);
+    }
+    App.ticker = requestAnimationFrame(rafLoop);
+}
+
+function stopTicker() {
+    App._rafRunning = false;
+    if (App.ticker) { cancelAnimationFrame(App.ticker); App.ticker = null; }
+}
+
+function tick(ts) {
+    var rawTime = getCurrentTime();
+    var time = rawTime + App.offset / 1000;
+
+    // Update progress bar — throttle
+    if (App.player && ts - App._lastProgressUpdate > 200) {
+        App._lastProgressUpdate = ts;
+        var dur = App.playerType === 'yt'
+            ? (App.player.getDuration ? App.player.getDuration() : 0)
+            : App.player.duration;
+        if (dur > 0) {
+            $('progress-fill').style.width = (rawTime / dur * 100) + '%';
+        }
+    }
+
+    // A-B loop
+    if (App.abState === 2 && App.abStart !== null && App.abEnd !== null) {
+        if (rawTime >= App.abEnd) seekTo(App.abStart);
+    }
+
+    var subs = getActiveSubs();
+    var idx = -1;
+
+    if (App.pauseMode === 'sentence') {
+        for (var i = 0; i < subs.length; i++) {
+            if (time >= subs[i].start && time <= subs[i].end) { idx = i; break; }
+        }
+    } else if (App.pauseMode === 'time') {
+        for (var i = 0; i < App.timeSegments.length; i++) {
+            if (time >= App.timeSegments[i].start && time < App.timeSegments[i].end) { idx = i; break; }
+        }
+    } else if (App.pauseMode === 'words') {
+        for (var i = 0; i < App.wordSegments.length; i++) {
+            if (time >= App.wordSegments[i].start && time < App.wordSegments[i].end) { idx = i; break; }
+        }
+    }
+
+    if (idx !== App._lastSubIdx) {
+        App._lastSubIdx = idx;
+        App.currentIndex = idx;
+        updateSubtitleDisplay(time);
+    }
+
+    // Smart pause
+    if (App.smartPause && idx !== -1 && App.isPlaying) {
+        var shouldPause = false;
+        if (App.pauseMode === 'sentence' && subs[idx]) {
+            if (time >= subs[idx].end - 0.15) shouldPause = true;
+        } else if (App.pauseMode === 'time' && App.timeSegments[idx]) {
+            if (time >= App.timeSegments[idx].end - 0.15) shouldPause = true;
+        } else if (App.pauseMode === 'words' && App.wordSegments[idx]) {
+            if (time >= App.wordSegments[idx].end - 0.15) shouldPause = true;
+        }
+        if (shouldPause) {
+            pauseVideo();
+            handleLoopOnPause();
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// GENERATE SEGMENTS
+// ══════════════════════════════════════════════════════════════
+function generateTimeSegments() {
+    var dur = App.pauseDuration;
+    var total = 600;
+    if (App.player) {
+        total = App.playerType === 'yt' 
+            ? (App.player.getDuration ? App.player.getDuration() : 600)
+            : (App.player.duration || 600);
+    }
+    var count = Math.ceil(total / dur);
+    App.timeSegments = [];
+    for (var i = 0; i < count; i++) {
+        App.timeSegments.push({
+            start: i * dur,
+            end: Math.min((i + 1) * dur, total)
+        });
+    }
+}
+
+function generateWordSegments() {
+    var subs = getActiveSubs();
+    if (!subs || !subs.length) { App.wordSegments = []; return; }
+    var count = App.wordCount || 5;
+    App.wordSegments = [];
+    var currentWords = [];
+    var currentStart = 0;
+    var currentEnd = 0;
+    var segIndex = 0;
+
+    for (var i = 0; i < subs.length; i++) {
+        var sub = subs[i];
+        var cleanText = sub.text.replace(/<[^>]+>/g, '').replace(/[♪♫♩♬]/g, '').trim();
+        var words = cleanText.split(/\s+/).filter(function(w) { return w.length > 0; });
+
+        for (var w = 0; w < words.length; w++) {
+            var wordDuration = (sub.end - sub.start) / Math.max(words.length, 1);
+            var wordStart = sub.start + (w * wordDuration);
+            var wordEnd = wordStart + wordDuration;
+
+            if (currentWords.length === 0) {
+                currentStart = wordStart;
+                currentEnd = wordEnd;
+            } else {
+                currentEnd = wordEnd;
+            }
+            currentWords.push(words[w]);
+
+            if (currentWords.length >= count) {
+                App.wordSegments.push({
+                    index: segIndex++,
+                    start: currentStart,
+                    end: currentEnd,
+                    words: currentWords.slice()
+                });
+                currentWords = [];
+            }
+        }
+    }
+    if (currentWords.length > 0) {
+        App.wordSegments.push({
+            index: segIndex,
+            start: currentStart,
+            end: currentEnd,
+            words: currentWords.slice()
+        });
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// SUBTITLE DISPLAY
+// ══════════════════════════════════════════════════════════════
+function updateSubtitleDisplay(time) {
+    var subs = getActiveSubs();
+    var subs2 = getSecondaryActiveSubs();
+
+    var textEl = $('sentence-text');
+    var secEl = $('sentence-secondary');
+    var timeEl = $('sentence-time');
+    var liveDot = $('live-dot');
+
+    var idx = App.currentIndex;
+
+    if (idx === -1 || (App.pauseMode === 'sentence' && !subs[idx])) {
+        textEl.innerHTML = '<span style="opacity:0.3;font-size:0.85em;">—</span>';
+        secEl.classList.add('hidden');
+        timeEl.textContent = '--:-- → --:--';
+        liveDot.classList.remove('active');
+        return;
+    }
+
+    var sub, sub2;
+
+    if (App.pauseMode === 'sentence') {
+        sub = subs[idx];
+        liveDot.classList.add('active');
+        timeEl.textContent = fmtTime(sub.start) + ' → ' + fmtTime(sub.end);
+
+        // Render primary text with word highlight
+        if ($('word-highlight-toggle').checked) {
+            var words = sub.text.split(/(\s+)/);
+            var html = '';
+            for (var wi = 0; wi < words.length; wi++) {
+                var chunk = words[wi];
+                if (/\s+/.test(chunk)) { html += chunk; continue; }
+                html += '<span class="w" data-word="' + escHtml(chunk) + '">' + escHtml(chunk) + '</span>';
+            }
+            textEl.innerHTML = html;
+
+            // Attach click → dictionary
+            var spans = textEl.querySelectorAll('.w');
+            for (var si = 0; si < spans.length; si++) {
+                (function(el) {
+                    el.addEventListener('click', function() {
+                        var word = el.dataset.word.replace(/[^a-zA-Z؀-ۿÀ-ɏ]/g, '');
+                        if (word) openDictionary(word);
+                    });
+                })(spans[si]);
+            }
+        } else {
+            textEl.textContent = sub.text;
+        }
+
+        textEl.classList.toggle('blurred', App.hidePrimary);
+
+        // Secondary sub
+        var sub2Idx = -1;
+        for (var i = 0; i < subs2.length; i++) {
+            if (time >= subs2[i].start && time <= subs2[i].end) { sub2Idx = i; break; }
+        }
+        if (sub2Idx !== -1 && App.secondaryLang !== 'none') {
+            secEl.classList.remove('hidden');
+            secEl.textContent = subs2[sub2Idx].text;
+            secEl.classList.toggle('blurred', App.hideSecondary);
+        } else {
+            secEl.classList.add('hidden');
+        }
+
+        // Scroll segment list
+        if ($('auto-scroll-toggle').checked) scrollToSegment(idx);
+
+    } else if (App.pauseMode === 'time') {
+        var seg = App.timeSegments[idx];
+        if (!seg) return;
+        liveDot.classList.add('active');
+        timeEl.textContent = fmtTime(seg.start) + ' → ' + fmtTime(seg.end);
+
+        // Find subtitles in this time segment
+        var inSeg = subs.filter(function(s) { return s.start < seg.end && s.end > seg.start; });
+        var combined = inSeg.map(function(s) { return s.text; }).join(' ');
+        textEl.textContent = combined || '—';
+        textEl.classList.toggle('blurred', App.hidePrimary);
+
+        var inSeg2 = subs2.filter(function(s) { return s.start < seg.end && s.end > seg.start; });
+        var combined2 = inSeg2.map(function(s) { return s.text; }).join(' ');
+        if (combined2 && App.secondaryLang !== 'none') {
+            secEl.classList.remove('hidden');
+            secEl.textContent = combined2;
+            secEl.classList.toggle('blurred', App.hideSecondary);
+        } else {
+            secEl.classList.add('hidden');
+        }
+
+        if ($('auto-scroll-toggle').checked) scrollToSegment(idx);
+
+    } else if (App.pauseMode === 'words') {
+        var seg = App.wordSegments[idx];
+        if (!seg) return;
+        liveDot.classList.add('active');
+        timeEl.textContent = fmtTime(seg.start) + ' → ' + fmtTime(seg.end) + ' (' + seg.words.length + ' كلمة)';
+        textEl.textContent = seg.words.join(' ');
+        textEl.classList.toggle('blurred', App.hidePrimary);
+        secEl.classList.add('hidden');
+
+        if ($('auto-scroll-toggle').checked) scrollToSegment(idx);
+    }
+
+    // Update segment list highlight
+    var items = $$('.segment-item');
+    for (var i = 0; i < items.length; i++) {
+        items[i].classList.toggle('active', parseInt(items[i].dataset.index) === idx);
+    }
+}
+
+function scrollToSegment(idx) {
+    var list = $('segment-list');
+    var item = list.querySelector('.segment-item[data-index="' + idx + '"]');
+    if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════════════════════
+// LOOP ON PAUSE (Shadow Mode)
+// ══════════════════════════════════════════════════════════════
+function handleLoopOnPause() {
+    if (!App.loopActive) return;
+    if (App.loopRemaining > 0) {
+        App.loopRemaining--;
+        setTimeout(function() {
+            var target = 0;
+            if (App.pauseMode === 'sentence') {
+                var subs = getActiveSubs();
+                if (subs[App.currentIndex]) target = subs[App.currentIndex].start;
+            } else if (App.pauseMode === 'time') {
+                if (App.timeSegments[App.currentIndex]) target = App.timeSegments[App.currentIndex].start;
+            } else if (App.pauseMode === 'words') {
+                if (App.wordSegments[App.currentIndex]) target = App.wordSegments[App.currentIndex].start;
+            }
+            seekTo(target);
+            playVideo();
+        }, 500);
+    } else {
+        App.loopRemaining = App.loopCount;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// SEGMENT LIST RENDERING
+// ══════════════════════════════════════════════════════════════
+function renderSegmentList() {
+    var subs = getActiveSubs();
+    var subs2 = getSecondaryActiveSubs();
+    var list = $('segment-list');
+    var search = $('sentence-search').value.trim().toLowerCase();
+    var html = '';
+    var count = 0;
+
+    if (App.pauseMode === 'sentence') {
+        for (var i = 0; i < subs.length; i++) {
+            var sub = subs[i];
+            if (search && sub.text.toLowerCase().indexOf(search) === -1) continue;
+            var sub2 = subs2[i];
+            var sub2text = sub2 ? sub2.text : '';
+            html += '<div class="segment-item" data-index="' + i + '">' +
+                '<span class="seg-time">' + fmtTime(sub.start) + '</span>' +
+                '<div class="seg-body">' +
+                '<div class="seg-text">' + escHtml(sub.text) + '</div>' +
+                (sub2text ? '<div class="seg-sub">' + escHtml(sub2text) + '</div>' : '') +
+                '</div></div>';
+            count++;
+        }
+    } else if (App.pauseMode === 'time') {
+        for (var i = 0; i < App.timeSegments.length; i++) {
+            var seg = App.timeSegments[i];
+            var inSeg = subs.filter(function(s) { return s.start < seg.end && s.end > seg.start; });
+            var combined = inSeg.map(function(s) { return s.text; }).join(' ');
+            if (search && combined.toLowerCase().indexOf(search) === -1) continue;
+            html += '<div class="segment-item" data-index="' + i + '">' +
+                '<span class="seg-time">' + fmtTime(seg.start) + '–' + fmtTime(seg.end) + '</span>' +
+                '<div class="seg-body">' +
+                '<div class="seg-text">' + (combined ? escHtml(combined) : '<span style="opacity:0.5">— لا توجد ترجمة —</span>') + '</div>' +
+                '</div></div>';
+            count++;
+        }
+    } else if (App.pauseMode === 'words') {
+        for (var i = 0; i < App.wordSegments.length; i++) {
+            var seg = App.wordSegments[i];
+            var text = seg.words.join(' ');
+            if (search && text.toLowerCase().indexOf(search) === -1) continue;
+            html += '<div class="segment-item" data-index="' + i + '">' +
+                '<span class="seg-time">' + fmtTime(seg.start) + '–' + fmtTime(seg.end) + '</span>' +
+                '<div class="seg-body">' +
+                '<div class="seg-text">' + escHtml(text) + '</div>' +
+                '<div class="seg-sub">' + seg.words.length + ' كلمات</div>' +
+                '</div></div>';
+            count++;
+        }
+    }
+
+    list.innerHTML = html || '<div style="padding:1rem;text-align:center;font-size:0.78rem;color:var(--text-secondary);">لا توجد نتائج</div>';
+    $('badge-segments').textContent = count;
+
+    // Attach click handlers
+    var items = list.querySelectorAll('.segment-item');
+    for (var i = 0; i < items.length; i++) {
+        (function(idx) {
+            items[i].addEventListener('click', function() { jumpToSub(parseInt(idx)); });
+        })(items[i].dataset.index);
+    }
+}
+
+function jumpToSub(idx) {
+    idx = parseInt(idx);
+    var target = 0;
+    if (App.pauseMode === 'sentence') {
+        var subs = getActiveSubs();
+        if (!subs[idx]) return;
+        target = subs[idx].start;
+    } else if (App.pauseMode === 'time') {
+        if (!App.timeSegments[idx]) return;
+        target = App.timeSegments[idx].start;
+    } else if (App.pauseMode === 'words') {
+        if (!App.wordSegments[idx]) return;
+        target = App.wordSegments[idx].start;
+    }
+    seekTo(target);
+    playVideo();
+}
+
+// ══════════════════════════════════════════════════════════════
+// DICTIONARY (FreeDictionary API only — NO AI)
+// ══════════════════════════════════════════════════════════════
+function openDictionary(word) {
+    var modal = $('dict-modal');
+    var body = $('dict-modal-body');
+    openModal('dict-modal');
+    body.innerHTML = '<div class="dict-loading"><span class="spinner"></span><span class="dict-loading-word">' + escHtml(word) + '</span><span>جاري البحث...</span></div>';
+
+    fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (!Array.isArray(data) || !data.length) throw new Error('not found');
+            var entry = data[0];
+            var phonetic = entry.phonetic || '';
+            if (!phonetic && entry.phonetics) {
+                for (var i = 0; i < entry.phonetics.length; i++) {
+                    if (entry.phonetics[i].text) { phonetic = entry.phonetics[i].text; break; }
+                }
+            }
+            var defsHtml = '';
+            var meanings = entry.meanings || [];
+            for (var mi = 0; mi < meanings.length; mi++) {
+                var m = meanings[mi];
+                var posClass = 'pos-other';
+                var pos = (m.partOfSpeech || '').toLowerCase();
+                if (pos.indexOf('noun') !== -1) posClass = 'pos-noun';
+                else if (pos.indexOf('verb') !== -1) posClass = 'pos-verb';
+                else if (pos.indexOf('adj') !== -1) posClass = 'pos-adj';
+                else if (pos.indexOf('adv') !== -1) posClass = 'pos-adv';
+
+                var defs = m.definitions || [];
+                for (var di = 0; di < Math.min(2, defs.length); di++) {
+                    var d = defs[di];
+                    defsHtml += '<div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;align-items:start;">' +
+                        '<span style="font-size:0.65rem;font-weight:800;padding:0.15rem 0.5rem;border-radius:4px;white-space:nowrap;height:fit-content;margin-top:0.1rem;flex-shrink:0;background:rgba(59,130,246,0.15);color:#60a5fa;">' + escHtml(m.partOfSpeech) + '</span>' +
+                        '<div><div style="font-size:0.85rem;line-height:1.55;">' + escHtml(d.definition) + '</div>' +
+                        (d.example ? '<div style="font-size:0.78rem;color:var(--text-secondary);font-style:italic;margin-top:0.25rem;padding-right:0.5rem;border-right:2px solid var(--border);direction:ltr;text-align:left;">"' + escHtml(d.example) + '"</div>' : '') +
+                        '</div></div>';
+                }
+            }
+
+            body.innerHTML = '<div style="font-size:2rem;font-weight:900;color:var(--blue-l);font-family:JetBrains Mono,sans-serif;direction:ltr;line-height:1.1;">' + escHtml(word) + '</div>' +
+                (phonetic ? '<div style="font-size:0.76rem;color:var(--text-secondary);font-family:JetBrains Mono,monospace;direction:ltr;">' + escHtml(phonetic) + '</div>' : '') +
+                '<div class="dict-trans-box"><div class="dict-trans-label">📖 التعريف</div><div>' + (defsHtml || '<div style="color:var(--text-secondary)">لا توجد تعريفات</div>') + '</div></div>' +
+                '<div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;">' +
+                '<a href="https://www.google.com/search?q=' + encodeURIComponent(word) + '+meaning" target="_blank" style="flex:1;padding:0.5rem;border-radius:6px;font-size:0.78rem;font-weight:700;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:var(--transition);text-align:center;text-decoration:none;">🔍 Google</a>' +
+                '<button type="button" class="dict-ok-btn" style="flex:1;padding:0.5rem;border-radius:6px;font-size:0.78rem;font-weight:700;border:1px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;font-family:inherit;">✓ حسناً</button>' +
+                '</div>';
+
+            var okBtn = body.querySelector('.dict-ok-btn');
+            if (okBtn) okBtn.addEventListener('click', function() { closeModal('dict-modal'); });
+        })
+        .catch(function() {
+            body.innerHTML = '<div style="text-align:center;padding:1.4rem;">' +
+                '<div style="font-size:2rem;margin-bottom:0.5rem;">🔍</div>' +
+                '<div style="font-weight:700;margin-bottom:0.3rem;">' + escHtml(word) + '</div>' +
+                '<div style="color:var(--text-secondary);font-size:0.8rem;">لم يُعثر على الكلمة في القاموس</div>' +
+                '<div style="display:flex;gap:0.5rem;justify-content:center;margin-top:0.5rem;">' +
+                '<a href="https://www.google.com/search?q=' + encodeURIComponent(word) + '+meaning" target="_blank" style="padding:0.5rem;border-radius:6px;font-size:0.78rem;font-weight:700;border:1px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;font-family:inherit;text-decoration:none;">🔍 ابحث في Google</a>' +
+                '</div></div>';
+        });
+}
+
+// ══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════════
+function goNext() {
+    var max = 0;
+    if (App.pauseMode === 'sentence') max = getActiveSubs().length;
+    else if (App.pauseMode === 'time') max = App.timeSegments.length;
+    else if (App.pauseMode === 'words') max = App.wordSegments.length;
+    var next = App.currentIndex + 1;
+    if (next < max) jumpToSub(next);
+}
+
+function goPrev() {
+    var prev = Math.max(0, App.currentIndex - 1);
+    if (prev >= 0) jumpToSub(prev);
+}
+
+function goRepeat() {
+    if (App.currentIndex >= 0) jumpToSub(App.currentIndex);
+}
+
+// ══════════════════════════════════════════════════════════════
+// COPY SENTENCE
+// ══════════════════════════════════════════════════════════════
+function copyCurrentSentence() {
+    var text = '';
+    var subs = getActiveSubs();
+
+    if (App.pauseMode === 'sentence' && subs[App.currentIndex]) {
+        text = subs[App.currentIndex].text;
+    } else if (App.pauseMode === 'time') {
+        var seg = App.timeSegments[App.currentIndex];
+        if (seg) {
+            var inSeg = subs.filter(function(s) { return s.start < seg.end && s.end > seg.start; });
+            text = inSeg.map(function(s) { return s.text; }).join(' ');
+        }
+    } else if (App.pauseMode === 'words') {
+        var seg = App.wordSegments[App.currentIndex];
+        if (seg) text = seg.words.join(' ');
+    }
+
+    if (!text) { toast('⚠️ لا توجد جملة للنسخ', 'warning'); return; }
+
+    navigator.clipboard.writeText(text).then(function() {
+        showCopyTooltip();
+        toast('✅ تم نسخ الجملة', 'success');
+    }).catch(function() {
+        // Fallback
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showCopyTooltip();
+        toast('✅ تم نسخ الجملة', 'success');
+    });
+}
+
+function showCopyTooltip() {
+    var tooltip = $('copy-tooltip');
+    tooltip.classList.add('show');
+    setTimeout(function() { tooltip.classList.remove('show'); }, 1500);
+}
+
+// ══════════════════════════════════════════════════════════════
+// SUBTITLES LOAD
+// ══════════════════════════════════════════════════════════════
+function loadSubFile(file, isPrimary) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var subs = parseSubtitles(e.target.result);
+        if (!subs.length) { toast('⚠️ لم يتم العثور على ترجمة', 'warning'); return; }
+        if (isPrimary) {
+            App.subtitles = subs;
+            $('badge-primary-file').textContent = file.name.split('.').pop().toUpperCase();
+            toast('✅ تم تحميل ' + subs.length + ' جملة', 'success');
+        } else {
+            App.subtitles2 = subs;
+            toast('✅ ترجمة ثانوية: ' + subs.length + ' جملة', 'success');
+        }
+        generateWordSegments();
+        renderSegmentList();
+    };
+    reader.readAsText(file, 'UTF-8');
+}
+
+// ══════════════════════════════════════════════════════════════
+// OFFSET
+// ══════════════════════════════════════════════════════════════
+function adjustOffset(ms) {
+    App.offset += ms;
+    updateOffsetDisplay();
+}
+
+function updateOffsetDisplay() {
+    var display = (App.offset >= 0 ? '+' : '') + App.offset + 'ms';
+    $('offset-display').textContent = display;
+    $('badge-offset').textContent = display;
+}
+
+// ══════════════════════════════════════════════════════════════
+// EVENT LISTENERS
+// ══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+
+// ── Playback ──
+$('btn-play').addEventListener('click', togglePlay);
+$('btn-prev').addEventListener('click', goPrev);
+$('btn-next').addEventListener('click', goNext);
+$('btn-repeat').addEventListener('click', goRepeat);
+
+$('btn-swap').addEventListener('click', function() {
+    App.swapped = !App.swapped;
+    renderSegmentList();
+    toast(App.swapped ? '⇄ تم تبديل الترجمات' : '⇄ تم استعادة الترتيب الأصلي');
+});
+
+// Copy button
+$('btn-copy').addEventListener('click', copyCurrentSentence);
+
+// Loop
+$('btn-loop').addEventListener('click', function() {
+    App.loopActive = !App.loopActive;
+    App.loopRemaining = App.loopCount;
+    $('btn-loop').classList.toggle('on', App.loopActive);
+    toast(App.loopActive ? '🔁 تكرار مفعل ×' + App.loopCount : '⏹ تكرار معطل');
+});
+
+$('loop-inc').addEventListener('click', function() {
+    App.loopCount = Math.min(20, App.loopCount + 1);
+    App.loopRemaining = App.loopCount;
+    $('loop-count-display').textContent = App.loopCount;
+    $('loop-display').textContent = '×' + App.loopCount;
+});
+$('loop-dec').addEventListener('click', function() {
+    App.loopCount = Math.max(1, App.loopCount - 1);
+    App.loopRemaining = App.loopCount;
+    $('loop-count-display').textContent = App.loopCount;
+    $('loop-display').textContent = '×' + App.loopCount;
+});
+
+// A-B
+$('btn-ab').addEventListener('click', function() {
+    var btn = $('btn-ab');
+    if (App.abState === 0) {
+        App.abStart = getCurrentTime();
+        App.abState = 1;
+        btn.classList.add('st-a');
+        btn.textContent = 'A ✓ — B?';
+        toast('📍 نقطة A محددة — اضغط مرة أخرى لتحديد B');
+    } else if (App.abState === 1) {
+        App.abEnd = getCurrentTime();
+        if (App.abEnd <= App.abStart) App.abEnd = App.abStart + 5;
+        App.abState = 2;
+        btn.classList.remove('st-a');
+        btn.classList.add('st-on');
+        btn.textContent = 'A-B 🔁';
+        seekTo(App.abStart);
+        toast('🔁 A-B: ' + fmtTime(App.abStart) + ' → ' + fmtTime(App.abEnd));
+    } else {
+        App.abState = 0;
+        App.abStart = null;
+        App.abEnd = null;
+        btn.classList.remove('st-a', 'st-on');
+        btn.textContent = 'A-B';
+        toast('⏹ A-B معطل');
+    }
+});
+
+// Speed
+$('playback-speed').addEventListener('input', function() {
+    App.speed = parseFloat(this.value);
+    $('speed-val').textContent = App.speed.toFixed(2) + '×';
+    setPlaybackRate(App.speed);
+    $$('.speed-btn').forEach(function(b) {
+        b.classList.toggle('active', parseFloat(b.dataset.speed) === App.speed);
+    });
+});
+
+$$('.speed-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        App.speed = parseFloat(btn.dataset.speed);
+        $('playback-speed').value = App.speed;
+        $('speed-val').textContent = App.speed.toFixed(1) + '×';
+        setPlaybackRate(App.speed);
+        $$('.speed-btn').forEach(function(b) { b.classList.toggle('active', b === btn); });
+    });
+});
+
+// Toggles
+$('hide-primary-toggle').addEventListener('change', function() {
+    App.hidePrimary = this.checked;
+    $('sentence-text').classList.toggle('blurred', App.hidePrimary);
+    $('hide-badge').classList.toggle('show', App.hidePrimary || App.hideSecondary);
+});
+$('hide-secondary-toggle').addEventListener('change', function() {
+    App.hideSecondary = this.checked;
+    $('sentence-secondary').classList.toggle('blurred', App.hideSecondary);
+    $('hide-badge').classList.toggle('show', App.hidePrimary || App.hideSecondary);
+});
+$('smart-pause-toggle').addEventListener('change', function() {
+    App.smartPause = this.checked;
+    toast(App.smartPause ? '⏸ الإيقاف الذكي مفعل' : '▶ الإيقاف الذكي معطل');
+});
+
+// Video source
+$('btn-load-yt').addEventListener('click', function() {
+    var url = $('yt-url').value.trim();
+    if (!url) { toast('⚠️ أدخل رابط يوتيوب', 'warning'); return; }
+    loadYouTube(url);
+});
+$('yt-url').addEventListener('keydown', function(e) { if (e.key === 'Enter') $('btn-load-yt').click(); });
+
+$('btn-load-local').addEventListener('click', function() { $('video-file-input').click(); });
+$('video-file-input').addEventListener('change', function() {
+    if (this.files[0]) loadLocalVideo(this.files[0]);
+});
+$('btn-clear-video').addEventListener('click', function() {
+    var lp = $('local-player');
+    lp.src = ''; lp.classList.add('hidden');
+    pauseVideo();
+    App.player = null; App.playerType = null;
+    if (ytPlayer && ytPlayer.destroy) { ytPlayer.destroy(); ytPlayer = null; }
+    var placeholder = $('video-placeholder');
+    if (placeholder) placeholder.style.display = '';
+    stopTicker();
+    toast('🗑️ تم مسح الفيديو');
+});
+
+// Subtitle files
+$('drop-primary').addEventListener('click', function() { $('sub-primary-input').click(); });
+$('sub-primary-input').addEventListener('change', function() { if (this.files[0]) loadSubFile(this.files[0], true); });
+
+$('drop-secondary').addEventListener('click', function() { $('sub-secondary-input').click(); });
+$('sub-secondary-input').addEventListener('change', function() { if (this.files[0]) loadSubFile(this.files[0], false); });
+
+// Drag & drop
+function setupDropZone(zone, isPrimary) {
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('drag-over'); });
+    zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        var file = e.dataTransfer.files[0];
+        if (file) loadSubFile(file, isPrimary);
+    });
+}
+setupDropZone($('drop-primary'), true);
+setupDropZone($('drop-secondary'), false);
+
+$('btn-clear-subs').addEventListener('click', function() {
+    App.subtitles = []; App.subtitles2 = [];
+    $('badge-primary-file').textContent = '—';
+    $('segment-list').innerHTML = '<div style="padding:1rem;text-align:center;font-size:0.78rem;color:var(--text-secondary);">لا توجد فترات</div>';
+    $('badge-segments').textContent = '0';
+    toast('🗑️ تم مسح ملفات الترجمة');
+});
+
+$('btn-swap-subs').addEventListener('click', function() {
+    var t = App.subtitles; App.subtitles = App.subtitles2; App.subtitles2 = t;
+    renderSegmentList();
+    toast('⇄ تم تبديل ملفات الترجمة');
+});
+
+// Language buttons
+$$('[data-lang]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        $$('[data-lang]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        App.primaryLang = btn.dataset.lang;
+        renderSegmentList();
+    });
+});
+$$('[data-slang]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        $$('[data-slang]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        App.secondaryLang = btn.dataset.slang;
+    });
+});
+
+// Pause mode buttons
+$$('.mode-btn[data-mode]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        $$('.mode-btn[data-mode]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        App.pauseMode = btn.dataset.mode;
+        var desc = 'يوقف تلقائياً بعد كل ';
+        if (App.pauseMode === 'sentence') desc += 'جملة';
+        else if (App.pauseMode === 'time') desc += App.pauseDuration + ' ثوانٍ';
+        else if (App.pauseMode === 'words') desc += App.wordCount + ' كلمات';
+        $('pause-mode-desc').textContent = desc;
+        generateTimeSegments();
+        generateWordSegments();
+        renderSegmentList();
+    });
+});
+
+// Offset
+$('btn-offset-m5').addEventListener('click', function() { adjustOffset(-5000); });
+$('btn-offset-m1').addEventListener('click', function() { adjustOffset(-1000); });
+$('btn-offset-m01').addEventListener('click', function() { adjustOffset(-100); });
+$('btn-offset-p01').addEventListener('click', function() { adjustOffset(100); });
+$('btn-offset-p1').addEventListener('click', function() { adjustOffset(1000); });
+$('btn-offset-p5').addEventListener('click', function() { adjustOffset(5000); });
+$('btn-reset-offset').addEventListener('click', function() {
+    App.offset = 0;
+    updateOffsetDisplay();
+});
+
+// Font sizes
+$('font-primary-range').addEventListener('input', function() {
+    var v = this.value + 'px';
+    document.documentElement.style.setProperty('--font-size-primary', v);
+    $('font-primary-val').textContent = v;
+});
+$('font-secondary-range').addEventListener('input', function() {
+    var v = this.value + 'px';
+    document.documentElement.style.setProperty('--font-size-secondary', v);
+    $('font-secondary-val').textContent = v;
+});
+
+// Merged tabs
+$$('.merged-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        $$('.merged-tab').forEach(function(t) { t.classList.remove('active'); });
+        $$('.tab-pane').forEach(function(p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        var pane = $('tab-' + tab.dataset.tab);
+        if (pane) pane.classList.add('active');
+    });
+});
+
+// Search
+$('sentence-search').addEventListener('input', debounce(function() {
+    renderSegmentList();
+}, 200));
+
+// Theme
+$('theme-toggle').addEventListener('click', function() {
+    var body = document.body;
+    var isDark = body.dataset.theme === 'dark';
+    body.dataset.theme = isDark ? 'light' : 'dark';
+    $('theme-toggle').textContent = isDark ? '☀️' : '🌙';
+});
+
+// Color dots
+$$('.color-dot').forEach(function(dot) {
+    dot.addEventListener('click', function() {
+        $$('.color-dot').forEach(function(d) { d.classList.remove('active'); });
+        dot.classList.add('active');
+        var color = dot.dataset.color;
+        var glow = dot.dataset.glow;
+        document.documentElement.style.setProperty('--blue', color);
+        document.documentElement.style.setProperty('--blue-l', color);
+        document.documentElement.style.setProperty('--blue-g', glow);
+        document.documentElement.style.setProperty('--accent', color);
+        document.documentElement.style.setProperty('--accent-l', color);
+        document.documentElement.style.setProperty('--accent-g', glow);
+    });
+});
+
+// Help modal
+$('help-btn').addEventListener('click', function() { openModal('help-modal'); });
+$$('.modal-overlay').forEach(function(m) {
+    m.addEventListener('click', function(e) { if (e.target === m) m.classList.remove('show'); });
+});
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+
+    switch (e.key.toLowerCase()) {
+        case ' ': e.preventDefault(); togglePlay(); break;
+        case 'n': case 'arrowright': e.preventDefault(); goNext(); break;
+        case 'p': case 'arrowleft': e.preventDefault(); goPrev(); break;
+        case 'r': goRepeat(); break;
+        case 's': $('btn-swap').click(); break;
+        case 'c': copyCurrentSentence(); break;
+        case 'b': $('btn-ab').click(); break;
+        case 'h':
+            $('hide-primary-toggle').checked = !$('hide-primary-toggle').checked;
+            $('hide-primary-toggle').dispatchEvent(new Event('change'));
+            break;
+        case '[':
+            App.speed = Math.max(0.25, App.speed - 0.1);
+            $('playback-speed').value = App.speed;
+            $('speed-val').textContent = App.speed.toFixed(2) + '×';
+            setPlaybackRate(App.speed);
+            break;
+        case ']':
+            App.speed = Math.min(2, App.speed + 0.1);
+            $('playback-speed').value = App.speed;
+            $('speed-val').textContent = App.speed.toFixed(2) + '×';
+            setPlaybackRate(App.speed);
+            break;
+    }
+});
+
+// ── INIT ──
+generateTimeSegments();
+renderSegmentList();
+updateOffsetDisplay();
+toast('🎯 Alaa Shadowing Pro GOLD Pro جاهز!', 'success', 4000);
+console.log('✅ Alaa Shadowing Pro GOLD Pro — Ready');
+
+});
+</script>
+
+<!-- GOLD MAX PATCH -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+
+// حفظ الإعدادات
+try{
+  const speed=document.getElementById('playback-speed');
+  if(speed){
+    speed.value=localStorage.getItem('gold_speed')||speed.value;
+    speed.addEventListener('input',()=>localStorage.setItem('gold_speed',speed.value));
+  }
+}catch(e){}
+
+// اختصارات إضافية
+document.addEventListener('keydown',(e)=>{
+  if(e.ctrlKey && e.key.toLowerCase()==='f'){
+    e.preventDefault();
+    document.getElementById('sentence-search')?.focus();
+  }
+  if(e.key==='ArrowUp'){
+    const s=document.getElementById('playback-speed');
+    if(s){ s.value=Math.min(2,parseFloat(s.value)+0.05); s.dispatchEvent(new Event('input'));}
+  }
+  if(e.key==='ArrowDown'){
+    const s=document.getElementById('playback-speed');
+    if(s){ s.value=Math.max(0.25,parseFloat(s.value)-0.05); s.dispatchEvent(new Event('input'));}
+  }
+});
+
+// ترجمة فورية للكلمات
+async function quickTranslate(word){
+ try{
+   const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(word)+'&langpair=en|ar');
+   const d=await r.json();
+   alert(word + " → " + (d.responseData?.translatedText || "لا توجد ترجمة"));
+ }catch(e){}
+}
+
+document.body.addEventListener('dblclick',(e)=>{
+  const t=e.target;
+  if(t && t.classList && t.classList.contains('w')){
+      quickTranslate(t.textContent.trim());
+  }
+});
+
+// تحسين البحث
+const search=document.getElementById('sentence-search');
+if(search){
+ let timer;
+ search.addEventListener('input',()=>{
+   clearTimeout(timer);
+   timer=setTimeout(()=>{
+      const q=search.value.toLowerCase().trim();
+      document.querySelectorAll('.segment-item').forEach(el=>{
+        el.style.display=el.textContent.toLowerCase().includes(q)?'':'none';
+      });
+   },120);
+ });
+}
+
+});
+</script>
+
+</body>
+</html>
